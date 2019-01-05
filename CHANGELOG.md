@@ -10,4 +10,3 @@
 * Unregister a data source.
 * Discover data sources.
 * Route data from MQTT topics to Kafka topics.
-* Dockerise.
