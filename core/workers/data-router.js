@@ -42,7 +42,7 @@ const _createDataRouteEnd = (start) => {
     });
   }).then((dataSourceDefinition) => {
     // Discover the data kind for the start.
-    const id = dataSourceDefinition.dataKindReferenceIDs.dataKindReferenceID[0];
+    const id = dataSourceDefinition.dataKindReferenceID;
     return modelDiscoverer.discoverDataKinds({ id }).then((dataKinds) => {
       if (!dataKinds.length) {
         logger.error(`Data kind ${ id } does not exist.`);
@@ -92,7 +92,7 @@ const _createDataRouteEnd = (start) => {
     const end = new DataSourceManifest({
       name: start.name.replace('plain text', 'JSON').replace('MQTT', 'Kafka'),
       description: start.description.replace('plain text', 'JSON').replace('MQTT', 'Kafka'),
-      macAddress: process.env.MAC_ADDRESS,
+      macAddress: process.env.EDGE_GATEWAY_MAC_ADDRESS,
       dataSourceDefinitionReferenceID: dataSourceDefinition.id,
       dataSourceDefinitionInterfaceParameters: {
         parameter: [
@@ -127,21 +127,18 @@ const _routeMessage = (topic, message) => {
   const timestamp = new Date().toJSON();
   new Promise((resolve, reject) => {
     // Construct the message to send to Kafka.
-    // NOTE: The message is essentially a data set.
+    // NOTE: The message is essentially an observation.
     const ktopic = _mqttTopic2KafkaTopic(topic);
     const cached = _kafka.cache[ktopic];
     const data = {
       id: uuidv4(),
+      edgeGatewayReferenceID: process.env.EDGE_GATEWAY_ID,
       dataSourceManifestReferenceID: cached.dataSource,
-      timestamp,
-      observation: [
-        {
-          id: uuidv4(),
-          dataKindReferenceID: cached.dataKind,
-          timestamp,
-          value: message.toString()
-        }
-      ]
+      dataKindReferenceID: cached.dataKind,
+      acquisitionTimestamp: timestamp,
+      collectionTimestamp: timestamp,
+      // Send all values as a string.
+      value: message.toString()
     };
     // Send the message to the corresponding topic in Kafka.
     _kafka.producer.send([{
@@ -179,7 +176,7 @@ const _setUpDataRoute = (dataRoute) => {
     // Cache information about the data route.
     const id = dataRoute.end.dataSourceDefinitionReferenceID;
     return modelDiscoverer.discoverDataSourceDefinitions({ id }).then((dataSourceDefinitions) => {
-      const dataKind = dataSourceDefinitions[0].dataKindReferenceIDs.dataKindReferenceID[0];
+      const dataKind = dataSourceDefinitions[0].dataKindReferenceID;
       _kafka.cache[_mqttTopic2KafkaTopic(topic)] = {
         dataSource: dataRoute.end._id,
         dataKind: dataKind

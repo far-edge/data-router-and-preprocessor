@@ -1,0 +1,9 @@
+{
+  "id": "d2287f0a-8d8a-4cbd-a5c4-a48434e3ec73",
+  "edgeGatewayReferenceID": "...",
+  "dataSourceManifestReferenceID": "9ecf1a34-846a-4b77-82f6-b9991874065b",
+  "dataKindReferenceID": "d188c222-2875-47b4-b961-0ee37aa6e15d",
+  "acquisitionTimestamp": "2018-06-19T14:40:34.688Z",
+  "collectionTimestamp": "2018-06-19T14:40:34.688Z",
+  "value": 36
+}
