@@ -170,8 +170,10 @@ const _setUpDataRoute = (dataRoute) => {
   const host = first(parameters.filter((p) => { return p.key === 'host'; })).value;
   const topic = first(parameters.filter((p) => { return p.key === 'topic'; })).value;
   const port = first(parameters.filter((p) => { return p.key === 'port'; })).value;
-  const username = first(parameters.filter((p) => { return p.key === 'username'; })).value;
-  const password = first(parameters.filter((p) => { return p.key === 'password'; })).value;
+  let p = first(parameters.filter((p) => { return p.key === 'username'; }));
+  const username = p ? p.value : undefined;
+  p = first(parameters.filter((p) => { return p.key === 'password'; }));
+  const password = p ? p.value : undefined;
   const url = `${ protocol }://${ host }:${ port }`;
   return Promise.try(() => {
     // Cache information about the data route.
@@ -266,7 +268,7 @@ const tearDownDataRoute = (start) => {
     // Find the data route from the endpoint.
     return DataRoute.findOne({ start });
   }).then((dataRoute) => {
-    // The data route does not ezist.
+    // The data route does not exist.
     // Nothing to tear down.
     if (!dataRoute) {
       logger.debug(`No data route from ${ start._id } to tear down.`);
