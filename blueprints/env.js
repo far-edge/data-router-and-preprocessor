@@ -2,6 +2,8 @@ const validations = require('../core/common/validations');
 
 const env = validations.object({
   API_BASE_URL: validations.string().uri().required(),
+  EDGE_GATEWAY_ID: validations.string().required(),
+  EDGE_GATEWAY_MAC_ADDRESS: validations.string().required(),
   HOST: validations.string().hostname().required(),
   KAFKA_BROKER_HOST: validations.string().hostname().required(),
   KAFKA_BROKER_PORT: validations.number().required(),
@@ -11,8 +13,6 @@ const env = validations.object({
     'info',
     'warn'
   ]).required(),
-  EDGE_GATEWAY_MAC_ADDRESS: validations.string().required(),
-  EDGE_GATEWAY_ID: validations.string().required(),
   MAX_REQUEST_BODY_SIZE: validations.number().integer().required(),
   MODEL_REPOSITORY_BASE_URL: validations.string().uri().required(),
   MONGODB_HOST: validations.string().hostname().required(),
