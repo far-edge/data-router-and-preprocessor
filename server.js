@@ -55,7 +55,7 @@ if (process.env.LOG_LEVEL === 'debug') {
 
 // Bind and listen for connections on the given port and host.
 if (!module.parent) {
-  app.listen(process.env.PORT, process.env.HOST, () => {
+  app.listen(7777, '0.0.0.0', () => {
     logger.info(`Server started in ${process.env.NODE_ENV} mode on port ${ process.env.PORT }.`);
   });
 }
