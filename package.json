@@ -3,7 +3,7 @@
   "description": "The FAR-EDGE data router and preprocesser.",
   "author": "Athens Information Technology <info@ait.gr>",
   "version": "1.0.0",
-  "license": "Apache License v2.0",
+  "license": "Apache-2.0",
   "main": "server.js",
   "engines": {
     "node": ">=10.1.0",
@@ -22,7 +22,7 @@
     "url": "git@github.com:far-edge/distributed-data-analytics.git"
   },
   "dependencies": {
-    "async-mqtt": "^1.0.1",
+    "async-mqtt": "^2.4.2",
     "bluebird": "^3.5.0",
     "body-parser": "^1.18.2",
     "callsite-record": "^4.1.0",
@@ -36,9 +36,9 @@
     "joi": "^13.2.0",
     "kafka-node": "^2.6.1",
     "moment": "^2.18.1",
-    "mongoose": "^5.0.17",
-    "morgan": "^1.9.0",
-    "request": "^2.83.0",
+    "mongoose": "^5.7.0",
+    "morgan": "^1.9.1",
+    "request": "^2.88.0",
     "request-promise": "^4.2.2",
     "uuid": "^3.2.1",
     "winston": "^2.4.0"
@@ -47,7 +47,7 @@
     "apidoc": "^0.17.6",
     "chai": "^4.1.0",
     "chai-as-promised": "^7.1.1",
-    "chai-http": "^4.0.0",
+    "chai-http": "^4.3.0",
     "chai-like": "^1.1.1",
     "chai-things": "^0.2.0",
     "eslint": "^4.3.0",
@@ -57,9 +57,9 @@
     "faker": "^4.1.0",
     "husky": "^0.14.3",
     "mocha": "^5.1.1",
-    "nock": "^9.3.2",
-    "nodemon": "^1.11.0",
-    "nyc": "^11.4.1"
+    "nock": "^11.3.3",
+    "nodemon": "^1.19.2",
+    "nyc": "^14.1.1"
   },
   "nyc": {
     "exclude": [

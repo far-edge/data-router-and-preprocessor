@@ -12,6 +12,10 @@
 
 * Fix bug with optional parameters in data source definitions.
 
+**SECURITY**
+
+* Fix security vulnerabilities reported by GitHub.
+
 
 ##### [1.0.0] - 2019-01-05
 
