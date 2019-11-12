@@ -332,6 +332,7 @@ producer.on('ready', () => {
 });
 producer.on('error', (error) => {
   logger.error(`Failed to connect to the stream @ ${ uri }.`, error);
+  process.exit(245);
 });
 
 module.exports = {
